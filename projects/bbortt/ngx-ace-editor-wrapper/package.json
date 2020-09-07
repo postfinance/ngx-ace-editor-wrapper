@@ -1,6 +1,18 @@
 {
   "name": "@bbortt/ngx-ace-editor-wrapper",
   "version": "10.0.0-0",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Timon Borter",
+    "url": "https://bbortt.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bbortt/ngx-ace-editor-wrapper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bbortt/ngx-ace-editor-wrapper/issues"
+  },
   "peerDependencies": {
     "@angular/cli": "^10.0.0",
     "@angular/common": "^10.0.0",
