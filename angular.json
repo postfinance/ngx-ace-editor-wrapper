@@ -36,9 +36,7 @@
               "projects/bbortt/ngx-ace-editor-wrapper/tsconfig.lib.json",
               "projects/bbortt/ngx-ace-editor-wrapper/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

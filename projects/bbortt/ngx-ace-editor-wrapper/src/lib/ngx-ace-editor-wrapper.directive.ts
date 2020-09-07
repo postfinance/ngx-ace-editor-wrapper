@@ -1,154 +1,163 @@
-import {Directive, ElementRef, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output} from '@angular/core';
-import 'brace';
-import 'brace/theme/monokai';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core'
+import 'brace'
+import 'brace/theme/monokai'
 
-declare var ace: any;
+declare var ace: any
 
 @Directive({
-  selector: '[ace-editor]'
+  selector: '[ace-editor]',
 })
 export class AceEditorDirective implements OnInit, OnDestroy {
-  @Output() textChanged = new EventEmitter();
-  @Output() textChange = new EventEmitter();
-  editor: any;
-  oldText: any;
-  timeoutSaving: any;
+  @Output() textChanged = new EventEmitter()
+  @Output() textChange = new EventEmitter()
+  editor: any
+  oldText: any
+  timeoutSaving: any
 
   constructor(elementRef: ElementRef, private zone: NgZone) {
-    let el = elementRef.nativeElement;
+    let el = elementRef.nativeElement
     this.zone.runOutsideAngular(() => {
-      this.editor = ace['edit'](el);
-    });
-    this.editor.$blockScrolling = Infinity;
+      this.editor = ace['edit'](el)
+    })
+    this.editor.$blockScrolling = Infinity
   }
 
-  _options: any = {};
+  _options: any = {}
 
   @Input() set options(options: any) {
-    this._options = options;
-    this.editor.setOptions(options || {});
+    this._options = options
+    this.editor.setOptions(options || {})
   }
 
-  _readOnly: boolean = false;
+  _readOnly: boolean = false
 
   @Input() set readOnly(readOnly: any) {
-    this._readOnly = readOnly;
-    this.editor.setReadOnly(readOnly);
+    this._readOnly = readOnly
+    this.editor.setReadOnly(readOnly)
   }
 
-  _theme: string = 'monokai';
+  _theme: string = 'monokai'
 
   @Input() set theme(theme: any) {
-    this._theme = theme;
-    this.editor.setTheme(`ace/theme/${theme}`);
+    this._theme = theme
+    this.editor.setTheme(`ace/theme/${theme}`)
   }
 
-  _mode: any = 'html';
+  _mode: any = 'html'
 
   @Input() set mode(mode: any) {
-    this.setMode(mode);
+    this.setMode(mode)
   }
 
-  _autoUpdateContent: boolean = true;
+  _autoUpdateContent: boolean = true
 
   @Input() set autoUpdateContent(status: any) {
-    this._autoUpdateContent = status;
+    this._autoUpdateContent = status
   }
 
-  _durationBeforeCallback: number = 0;
+  _durationBeforeCallback: number = 0
 
   @Input() set durationBeforeCallback(num: number) {
-    this.setDurationBeforeCallback(num);
+    this.setDurationBeforeCallback(num)
   }
 
-  _text: string = '';
+  _text: string = ''
 
   @Input()
   get text() {
-    return this._text;
+    return this._text
   }
 
   set text(text: string) {
-    this.setText(text);
+    this.setText(text)
   }
 
   get aceEditor() {
-    return this.editor;
+    return this.editor
   }
 
   ngOnInit() {
-    this.init();
-    this.initEvents();
+    this.init()
+    this.initEvents()
   }
 
   ngOnDestroy() {
-    this.editor.destroy();
+    this.editor.destroy()
   }
 
   init() {
-    this.editor.setOptions(this._options || {});
-    this.editor.setTheme(`ace/theme/${this._theme}`);
-    this.setMode(this._mode);
-    this.editor.setReadOnly(this._readOnly);
+    this.editor.setOptions(this._options || {})
+    this.editor.setTheme(`ace/theme/${this._theme}`)
+    this.setMode(this._mode)
+    this.editor.setReadOnly(this._readOnly)
   }
 
   initEvents() {
-    this.editor.on('change', () => this.updateText());
-    this.editor.on('paste', () => this.updateText());
+    this.editor.on('change', () => this.updateText())
+    this.editor.on('paste', () => this.updateText())
   }
 
   updateText() {
-    let newVal = this.editor.getValue();
+    let newVal = this.editor.getValue()
     if (newVal === this.oldText) {
-      return;
+      return
     }
     if (!this._durationBeforeCallback) {
-      this._text = newVal;
+      this._text = newVal
       this.zone.run(() => {
-        this.textChange.emit(newVal);
-        this.textChanged.emit(newVal);
-      });
+        this.textChange.emit(newVal)
+        this.textChanged.emit(newVal)
+      })
     } else {
       if (this.timeoutSaving != null) {
-        clearTimeout(this.timeoutSaving);
+        clearTimeout(this.timeoutSaving)
       }
 
       this.timeoutSaving = setTimeout(() => {
-        this._text = newVal;
+        this._text = newVal
         this.zone.run(() => {
-          this.textChange.emit(newVal);
-          this.textChanged.emit(newVal);
-        });
-        this.timeoutSaving = null;
-      }, this._durationBeforeCallback);
+          this.textChange.emit(newVal)
+          this.textChanged.emit(newVal)
+        })
+        this.timeoutSaving = null
+      }, this._durationBeforeCallback)
     }
-    this.oldText = newVal;
+    this.oldText = newVal
   }
 
   setMode(mode: any) {
-    this._mode = mode;
+    this._mode = mode
     if (typeof this._mode === 'object') {
-      this.editor.getSession().setMode(this._mode);
+      this.editor.getSession().setMode(this._mode)
     } else {
-      this.editor.getSession().setMode(`ace/mode/${this._mode}`);
+      this.editor.getSession().setMode(`ace/mode/${this._mode}`)
     }
   }
 
   setText(text: any) {
     if (this._text !== text) {
       if (text === null || text === undefined) {
-        text = '';
+        text = ''
       }
 
       if (this._autoUpdateContent === true) {
-        this._text = text;
-        this.editor.setValue(text);
-        this.editor.clearSelection();
+        this._text = text
+        this.editor.setValue(text)
+        this.editor.clearSelection()
       }
     }
   }
 
   setDurationBeforeCallback(num: number) {
-    this._durationBeforeCallback = num;
+    this._durationBeforeCallback = num
   }
 }
