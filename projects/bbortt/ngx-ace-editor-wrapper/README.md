@@ -1,25 +1,124 @@
-# NgxAceEditorWrapper
+# @bbortt/ngx-ace-editor-wrapper
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
+Ace editor integration with TypeScript for Angular 10.
 
-## Code scaffolding
+[![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg?style=flat-square)](https://twitter.com/acdlite/status/974390255393505280)
+[![License: Apache 2](https://img.shields.io/badge/License-Apache2-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Run `ng generate component component-name --project ngx-ace-editor-wrapper` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-ace-editor-wrapper`.
+# Installation
 
-> Note: Don't forget to add `--project ngx-ace-editor-wrapper` or else it will be added to the default project in your `angular.json` file.
+`npm i @bbortt/ngx-ace-editor-wrapper`
 
-## Build
+## Loading the module:
 
-Run `ng build ngx-ace-editor-wrapper` to build the project. The build artifacts will be stored in the `dist/` directory.
+```ts
+import { AceEditorModule } from '@bbortt/ngx-ace-editor-wrapper';
 
-## Publishing
+@NgModule({
+  ...
+  imports: [
+    ...
+    AceEditorModule
+  ]
+})
+```
 
-After building your library with `ng build ngx-ace-editor-wrapper`, go to the dist folder `cd dist/ngx-ace-editor-wrapper` and run `npm publish`.
+# Usage
 
-## Running unit tests
+## Directive
 
-Run `ng test ngx-ace-editor-wrapper` to execute the unit tests via [Karma](https://karma-runner.github.io).
+> Minimal
 
-## Further help
+```ts
+//import { AceEditorModule } from '@bbortt/ngx-ace-editor-wrapper';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+import { Component } from '@angular/core'
+
+@Component({
+  template: `
+  <div ace-editor
+       [(text)]="text" // possible two way binding (thx ChrisProlls)
+       ></div>
+  `,
+})
+export class MyComponent {
+  text: string = ''
+}
+```
+
+> Complete
+
+```ts
+import { Component } from '@angular/core'
+
+//to use theme "eclipse"
+//with angular-cli add "../node_modules/ace-builds/src-min/ace.js"
+//and "../node_modules/ace-builds/src-min/theme-eclipse.js" to "scripts" var into the file angular-cli.json
+
+@Component({
+  template: `
+  <div ace-editor
+       [(text)]="text" // possible two way binding (thx ChrisProlls)
+       [mode]="'sql'" //string or object (thx ckiffel)
+       [theme]="'eclipse'"
+       [options]="options"
+       [readOnly]="false"
+       [autoUpdateContent]="true" //change content when [text] change
+       [durationBeforeCallback]="1000" //wait 1s before callback 'textChanged' sends new value
+       (textChanged)="onChange($event)"
+       style="min-height: 200px; width:100%; overflow: auto;"></div>
+  `,
+})
+export class MyComponent {
+  text: string = ''
+  options: any = { maxLines: 1000, printMargin: false }
+
+  onChange(code) {
+    console.log('new code', code)
+  }
+}
+```
+
+## Component
+
+```ts
+import { Component, ViewChild } from '@angular/core'
+
+//to use theme eclipse
+//with angular-cli add "../node_modules/ace-builds/src-min/ace.js"
+//and "../node_modules/ace-builds/src-min/theme-eclipse.js" to "scripts" var into the file angular-cli.json
+
+@Component({
+  template: `
+  <ace-editor
+       [(text)]="text" // possible two way binding (thx ChrisProlls)
+        #editor style="height:150px;"></ace-editor>
+  `,
+})
+export class AceCmp {
+  @ViewChild('editor') editor
+  text: string = ''
+
+  ngAfterViewInit() {
+    this.editor.setTheme('eclipse')
+
+    this.editor.getEditor().setOptions({
+      enableBasicAutocompletion: true,
+    })
+
+    this.editor.getEditor().commands.addCommand({
+      name: 'showOtherCompletions',
+      bindKey: 'Ctrl-.',
+      exec: function (editor) {},
+    })
+  }
+}
+```
+
+# Hat Tips
+
+- To Andrei Tumilovich for the original Angular 9 integration: [`tavwizard/ace-editor-ng9`](https://github.com/tavwizard/ace-editor-ng9)
+
+# License
+
+This project is licensed under the terms of the [Apache 2.0 License](https://raw.githubusercontent.com/bbortt/ngx-ace-editor-wrapper/canary/LICENSE).
