@@ -36,7 +36,7 @@ import { Component } from '@angular/core'
 
 @Component({
   template: `
-  <div ace-editor
+  <div ngxAceEditor
        [(text)]="text" // possible two way binding (thx ChrisProlls)
        ></div>
   `,
@@ -57,7 +57,7 @@ import { Component } from '@angular/core'
 
 @Component({
   template: `
-  <div ace-editor
+  <div ngxAceEditor
        [(text)]="text" // possible two way binding (thx ChrisProlls)
        [mode]="'sql'" //string or object (thx ckiffel)
        [theme]="'eclipse'"
@@ -90,7 +90,7 @@ import { Component, ViewChild } from '@angular/core'
 
 @Component({
   template: `
-  <ace-editor
+  <ngx-ace-editor
        [(text)]="text" // possible two way binding (thx ChrisProlls)
         #editor style="height:150px;"></ace-editor>
   `,
