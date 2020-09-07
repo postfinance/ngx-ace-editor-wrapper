@@ -14,66 +14,73 @@ import 'brace/theme/monokai'
 declare var ace: any
 
 @Directive({
-  selector: '[ace-editor]',
+  selector: '[ngxAceEditor]',
 })
 export class AceEditorDirective implements OnInit, OnDestroy {
   @Output() textChanged = new EventEmitter()
   @Output() textChange = new EventEmitter()
+
   editor: any
   oldText: any
   timeoutSaving: any
 
   constructor(elementRef: ElementRef, private zone: NgZone) {
-    let el = elementRef.nativeElement
+    const el = elementRef.nativeElement
     this.zone.runOutsideAngular(() => {
-      this.editor = ace['edit'](el)
+      this.editor = ace.edit(el)
     })
     this.editor.$blockScrolling = Infinity
   }
 
-  _options: any = {}
+  // tslint:disable-next-line:variable-name
+  private _options: any = {}
 
   @Input() set options(options: any) {
     this._options = options
     this.editor.setOptions(options || {})
   }
 
-  _readOnly: boolean = false
+  // tslint:disable-next-line:variable-name
+  private _readOnly = false
 
   @Input() set readOnly(readOnly: any) {
     this._readOnly = readOnly
     this.editor.setReadOnly(readOnly)
   }
 
-  _theme: string = 'monokai'
+  // tslint:disable-next-line:variable-name
+  private _theme = 'monokai'
 
   @Input() set theme(theme: any) {
     this._theme = theme
     this.editor.setTheme(`ace/theme/${theme}`)
   }
 
-  _mode: any = 'html'
+  // tslint:disable-next-line:variable-name
+  private _mode: any = 'html'
 
   @Input() set mode(mode: any) {
     this.setMode(mode)
   }
 
-  _autoUpdateContent: boolean = true
+  // tslint:disable-next-line:variable-name
+  private _autoUpdateContent = true
 
   @Input() set autoUpdateContent(status: any) {
     this._autoUpdateContent = status
   }
 
-  _durationBeforeCallback: number = 0
+  // tslint:disable-next-line:variable-name
+  private _durationBeforeCallback = 0
 
   @Input() set durationBeforeCallback(num: number) {
     this.setDurationBeforeCallback(num)
   }
 
-  _text: string = ''
+  // tslint:disable-next-line:variable-name
+  private _text = ''
 
-  @Input()
-  get text() {
+  @Input() get text(): string {
     return this._text
   }
 
@@ -81,33 +88,33 @@ export class AceEditorDirective implements OnInit, OnDestroy {
     this.setText(text)
   }
 
-  get aceEditor() {
+  get aceEditor(): any {
     return this.editor
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.init()
     this.initEvents()
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.editor.destroy()
   }
 
-  init() {
+  init(): void {
     this.editor.setOptions(this._options || {})
     this.editor.setTheme(`ace/theme/${this._theme}`)
     this.setMode(this._mode)
     this.editor.setReadOnly(this._readOnly)
   }
 
-  initEvents() {
+  initEvents(): void {
     this.editor.on('change', () => this.updateText())
     this.editor.on('paste', () => this.updateText())
   }
 
-  updateText() {
-    let newVal = this.editor.getValue()
+  updateText(): void {
+    const newVal = this.editor.getValue()
     if (newVal === this.oldText) {
       return
     }
@@ -134,7 +141,7 @@ export class AceEditorDirective implements OnInit, OnDestroy {
     this.oldText = newVal
   }
 
-  setMode(mode: any) {
+  setMode(mode: any): void {
     this._mode = mode
     if (typeof this._mode === 'object') {
       this.editor.getSession().setMode(this._mode)
@@ -143,7 +150,7 @@ export class AceEditorDirective implements OnInit, OnDestroy {
     }
   }
 
-  setText(text: any) {
+  setText(text: any): void {
     if (this._text !== text) {
       if (text === null || text === undefined) {
         text = ''
@@ -157,7 +164,7 @@ export class AceEditorDirective implements OnInit, OnDestroy {
     }
   }
 
-  setDurationBeforeCallback(num: number) {
+  setDurationBeforeCallback(num: number): void {
     this._durationBeforeCallback = num
   }
 }

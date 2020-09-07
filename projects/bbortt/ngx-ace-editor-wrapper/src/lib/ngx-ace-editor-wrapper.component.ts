@@ -16,7 +16,7 @@ import 'brace/theme/monokai'
 declare var ace: any
 
 @Component({
-  selector: 'ace-editor',
+  selector: 'ngx-ace-editor',
   template: '',
   styles: [':host { display:block;width:100%; }'],
   providers: [
@@ -29,69 +29,78 @@ declare var ace: any
 })
 export class AceEditorComponent
   implements ControlValueAccessor, OnInit, OnDestroy {
+  @Input() style: any = {}
+
   @Output() textChanged = new EventEmitter()
   @Output() textChange = new EventEmitter()
-  @Input() style: any = {}
-  _editor: any
+
   oldText: any
   timeoutSaving: any
+
+  private editor: any
 
   constructor(elementRef: ElementRef, private zone: NgZone) {
     const el = elementRef.nativeElement
     this.zone.runOutsideAngular(() => {
-      this._editor = ace.edit(el)
+      this.editor = ace.edit(el)
     })
-    this._editor.$blockScrolling = Infinity
+    this.editor.$blockScrolling = Infinity
   }
 
-  _options: any = {}
+  // tslint:disable-next-line:variable-name
+  private _options: any = {}
 
   @Input() set options(options: any) {
     this.setOptions(options)
   }
 
-  _readOnly = false
+  // tslint:disable-next-line:variable-name
+  private _readOnly = false
 
   @Input() set readOnly(readOnly: any) {
     this.setReadOnly(readOnly)
   }
 
-  _theme = 'monokai'
+  // tslint:disable-next-line:variable-name
+  private _theme = 'monokai'
 
   @Input() set theme(theme: any) {
     this.setTheme(theme)
   }
 
-  _mode: any = 'html'
+  // tslint:disable-next-line:variable-name
+  private _mode: any = 'html'
 
   @Input() set mode(mode: any) {
     this.setMode(mode)
   }
 
-  _autoUpdateContent = true
+  // tslint:disable-next-line:variable-name
+  private _autoUpdateContent = true
 
   @Input() set autoUpdateContent(status: any) {
     this.setAutoUpdateContent(status)
   }
 
-  _durationBeforeCallback = 0
+  // tslint:disable-next-line:variable-name
+  private _durationBeforeCallback = 0
 
   @Input() set durationBeforeCallback(num: number) {
     this.setDurationBeforeCallback(num)
   }
 
-  _text = ''
+  // tslint:disable-next-line:variable-name
+  private _text = ''
 
-  get text() {
+  get text(): string {
     return this._text
   }
 
-  @Input()
-  set text(text: string) {
+  @Input() set text(text: string) {
     this.setText(text)
   }
 
-  get value() {
+  get value(): string {
     return this.text
   }
 
@@ -100,29 +109,29 @@ export class AceEditorComponent
     this.setText(value)
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.init()
     this.initEvents()
   }
 
-  ngOnDestroy() {
-    this._editor.destroy()
+  ngOnDestroy(): void {
+    this.editor.destroy()
   }
 
-  init() {
+  init(): void {
     this.setOptions(this._options || {})
     this.setTheme(this._theme)
     this.setMode(this._mode)
     this.setReadOnly(this._readOnly)
   }
 
-  initEvents() {
-    this._editor.on('change', () => this.updateText())
-    this._editor.on('paste', () => this.updateText())
+  initEvents(): void {
+    this.editor.on('change', () => this.updateText())
+    this.editor.on('paste', () => this.updateText())
   }
 
-  updateText() {
-    const newVal = this._editor.getValue()
+  updateText(): void {
+    const newVal = this.editor.getValue()
     if (newVal === this.oldText) {
       return
     }
@@ -150,63 +159,64 @@ export class AceEditorComponent
     this.oldText = newVal
   }
 
-  setOptions(options: any) {
+  setOptions(options: any): void {
     this._options = options
-    this._editor.setOptions(options || {})
+    this.editor.setOptions(options || {})
   }
 
-  setReadOnly(readOnly: any) {
+  setReadOnly(readOnly: any): void {
     this._readOnly = readOnly
-    this._editor.setReadOnly(readOnly)
+    this.editor.setReadOnly(readOnly)
   }
 
-  setTheme(theme: any) {
+  setTheme(theme: any): void {
     this._theme = theme
-    this._editor.setTheme(`ace/theme/${theme}`)
+    this.editor.setTheme(`ace/theme/${theme}`)
   }
 
-  setMode(mode: any) {
+  setMode(mode: any): void {
     this._mode = mode
     if (typeof this._mode === 'object') {
-      this._editor.getSession().setMode(this._mode)
+      this.editor.getSession().setMode(this._mode)
     } else {
-      this._editor.getSession().setMode(`ace/mode/${this._mode}`)
+      this.editor.getSession().setMode(`ace/mode/${this._mode}`)
     }
   }
 
-  writeValue(value: any) {
+  writeValue(value: any): void {
     this.setText(value)
   }
 
-  registerOnChange(fn: any) {
+  registerOnChange(fn: any): void {
     this._onChange = fn
   }
 
-  registerOnTouched(fn: any) {}
+  registerOnTouched(fn: any): void {}
 
-  setText(text: any) {
+  setText(text: any): void {
     if (text === null || text === undefined) {
       text = ''
     }
     if (this._text !== text && this._autoUpdateContent === true) {
       this._text = text
-      this._editor.setValue(text)
+      this.editor.setValue(text)
       this._onChange(text)
-      this._editor.clearSelection()
+      this.editor.clearSelection()
     }
   }
 
-  setAutoUpdateContent(status: any) {
+  setAutoUpdateContent(status: any): void {
     this._autoUpdateContent = status
   }
 
-  setDurationBeforeCallback(num: number) {
+  setDurationBeforeCallback(num: number): void {
     this._durationBeforeCallback = num
   }
 
-  getEditor() {
-    return this._editor
+  getEditor(): any {
+    return this.editor
   }
 
+  // tslint:disable-next-line:variable-name
   private _onChange = (_: any) => {}
 }
