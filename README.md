@@ -24,7 +24,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Publishing
 
-Run `npm publish dist/bbortt/ngx-ace-editor-wrapper` on `release` in order to publish the artifact. Don't forget to add `--tag=beta` when publishing from `canary`.
+Run `npm publish dist/bbortt/ngx-ace-editor-wrapper --access public` on `release` in order to publish the artifact. Don't forget to add `--tag beta` when publishing from `canary`.
 
 # Running Tests
 
