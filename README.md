@@ -1,121 +1,44 @@
-# @bbortt/ngx-ace-editor-wrapper
+# bbortt / ngx-ace-editor-wrapper
+
 > Ace editor integration with TypeScript for Angular 10.
 
-[![npm version](https://badge.fury.io/js/ngx-ace-editor-wrapper.svg)](https://www.npmjs.com/package/@bbortt/ngx-ace-editor-wrapper) 
+[![Travis CI](https://travis-ci.com/bbortt/ngx-ace-editor-wrapper.svg?branch=master)](https://travis-ci.com/bbortt/ngx-ace-editor-wrapper)
+[![npm version](https://badge.fury.io/js/%40bbortt%2Fngx-ace-editor-wrapper.svg)](https://npmjs.org/package/@bbortt/ngx-ace-editor-wrapper)
+[![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg?style=flat-square)](https://twitter.com/acdlite/status/974390255393505280)
+[![License: Apache 2](https://img.shields.io/badge/License-Apache2-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-## Installation
-`npm i ngx-ace-editor-wrapper`
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
 
-### Loading the module:
+# Development server
 
-```ts
-import { AceEditorModule } from '@bbortt/ngx-ace-editor-wrapper';
+> Currently not implemented. An example will be added soon.
 
-@NgModule({
-  ...
-  imports: [
-    ...
-    AceEditorModule
-  ]
-})
-```
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Usage
-### Directive
+# Code scaffolding
 
-> Minimal
->
-```ts
-//import { AceEditorModule } from '@bbortt/ngx-ace-editor-wrapper';
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-import { Component } from '@angular/core';
+# Build
 
-@Component({
-  template: `
-  <div ace-editor
-       [(text)]="text" // possible two way binding (thx ChrisProlls)
-       ></div>
-  `
-})
-export class MyComponent {
-    text:string = "";
-}
-```
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-> Complete
+## Publishing
 
-```ts
-import { Component } from '@angular/core';
+Run `npm publish dist/bbortt/ngx-ace-editor-wrapper --access public` on `release` in order to publish the artifact. Don't forget to add `--tag beta` when publishing from `canary`.
 
-//to use theme "eclipse"
-//with angular-cli add "../node_modules/ace-builds/src-min/ace.js" 
-//and "../node_modules/ace-builds/src-min/theme-eclipse.js" to "scripts" var into the file angular-cli.json
+# Running Tests
 
-@Component({
-  template: `
-  <div ace-editor
-       [(text)]="text" // possible two way binding (thx ChrisProlls)
-       [mode]="'sql'" //string or object (thx ckiffel)
-       [theme]="'eclipse'"
-       [options]="options"
-       [readOnly]="false"
-       [autoUpdateContent]="true" //change content when [text] change
-       [durationBeforeCallback]="1000" //wait 1s before callback 'textChanged' sends new value
-       (textChanged)="onChange($event)"
-       style="min-height: 200px; width:100%; overflow: auto;"></div>
-  `
-})
-export class MyComponent {
-    text:string = "";
-    options:any = {maxLines: 1000, printMargin: false};
-    
-    onChange(code) {
-        console.log("new code", code);
-    }
-}
-```
+> Tests will be added soon.
 
-### Component
+## Unit tests
 
-```ts
-import {Component, ViewChild} from '@angular/core';
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-//to use theme eclipse
-//with angular-cli add "../node_modules/ace-builds/src-min/ace.js" 
-//and "../node_modules/ace-builds/src-min/theme-eclipse.js" to "scripts" var into the file angular-cli.json
+# End-to-end tests
 
-@Component({
-    template: `
-  <ace-editor
-       [(text)]="text" // possible two way binding (thx ChrisProlls)
-        #editor style="height:150px;"></ace-editor>
-  `
-})
-export class AceCmp {
-    @ViewChild('editor') editor;
-    text: string = "";
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-    ngAfterViewInit() {
-        this.editor.setTheme("eclipse");
+# Further help
 
-        this.editor.getEditor().setOptions({
-            enableBasicAutocompletion: true
-        });
-
-        this.editor.getEditor().commands.addCommand({
-            name: "showOtherCompletions",
-            bindKey: "Ctrl-.",
-            exec: function (editor) {
-
-            }
-        })
-    }
-}
-```
-
-## Hat Tips
-
-* To Andrei Tumilovich for the original Angular 9 integration: [`tavwizard/ace-editor-ng9`](https://github.com/tavwizard/ace-editor-ng9)
-
-## License
-This project is licensed under the terms of the [Apache 2.0 License](https://raw.githubusercontent.com/bbortt/ngx-ace-editor-wrapper/canary/LICENSE).
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

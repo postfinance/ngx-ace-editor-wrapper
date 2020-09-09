@@ -1,154 +1,170 @@
-import {Directive, ElementRef, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output} from '@angular/core';
-import 'brace';
-import 'brace/theme/monokai';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core'
+import 'brace'
+import 'brace/theme/monokai'
 
-declare var ace: any;
+declare var ace: any
 
 @Directive({
-  selector: '[ace-editor]'
+  selector: '[ngxAceEditor]',
 })
 export class AceEditorDirective implements OnInit, OnDestroy {
-  @Output() textChanged = new EventEmitter();
-  @Output() textChange = new EventEmitter();
-  editor: any;
-  oldText: any;
-  timeoutSaving: any;
+  @Output() textChanged = new EventEmitter()
+  @Output() textChange = new EventEmitter()
+
+  editor: any
+  oldText: any
+  timeoutSaving: any
 
   constructor(elementRef: ElementRef, private zone: NgZone) {
-    let el = elementRef.nativeElement;
+    const el = elementRef.nativeElement
     this.zone.runOutsideAngular(() => {
-      this.editor = ace['edit'](el);
-    });
-    this.editor.$blockScrolling = Infinity;
+      this.editor = ace.edit(el)
+    })
+    this.editor.$blockScrolling = Infinity
   }
 
-  _options: any = {};
+  // tslint:disable-next-line:variable-name
+  private _options: any = {}
 
   @Input() set options(options: any) {
-    this._options = options;
-    this.editor.setOptions(options || {});
+    this._options = options
+    this.editor.setOptions(options || {})
   }
 
-  _readOnly: boolean = false;
+  // tslint:disable-next-line:variable-name
+  private _readOnly = false
 
   @Input() set readOnly(readOnly: any) {
-    this._readOnly = readOnly;
-    this.editor.setReadOnly(readOnly);
+    this._readOnly = readOnly
+    this.editor.setReadOnly(readOnly)
   }
 
-  _theme: string = 'monokai';
+  // tslint:disable-next-line:variable-name
+  private _theme = 'monokai'
 
   @Input() set theme(theme: any) {
-    this._theme = theme;
-    this.editor.setTheme(`ace/theme/${theme}`);
+    this._theme = theme
+    this.editor.setTheme(`ace/theme/${theme}`)
   }
 
-  _mode: any = 'html';
+  // tslint:disable-next-line:variable-name
+  private _mode: any = 'html'
 
   @Input() set mode(mode: any) {
-    this.setMode(mode);
+    this.setMode(mode)
   }
 
-  _autoUpdateContent: boolean = true;
+  // tslint:disable-next-line:variable-name
+  private _autoUpdateContent = true
 
   @Input() set autoUpdateContent(status: any) {
-    this._autoUpdateContent = status;
+    this._autoUpdateContent = status
   }
 
-  _durationBeforeCallback: number = 0;
+  // tslint:disable-next-line:variable-name
+  private _durationBeforeCallback = 0
 
   @Input() set durationBeforeCallback(num: number) {
-    this.setDurationBeforeCallback(num);
+    this.setDurationBeforeCallback(num)
   }
 
-  _text: string = '';
+  // tslint:disable-next-line:variable-name
+  private _text = ''
 
-  @Input()
-  get text() {
-    return this._text;
+  @Input() get text(): string {
+    return this._text
   }
 
   set text(text: string) {
-    this.setText(text);
+    this.setText(text)
   }
 
-  get aceEditor() {
-    return this.editor;
+  get aceEditor(): any {
+    return this.editor
   }
 
-  ngOnInit() {
-    this.init();
-    this.initEvents();
+  ngOnInit(): void {
+    this.init()
+    this.initEvents()
   }
 
-  ngOnDestroy() {
-    this.editor.destroy();
+  ngOnDestroy(): void {
+    this.editor.destroy()
   }
 
-  init() {
-    this.editor.setOptions(this._options || {});
-    this.editor.setTheme(`ace/theme/${this._theme}`);
-    this.setMode(this._mode);
-    this.editor.setReadOnly(this._readOnly);
+  init(): void {
+    this.editor.setOptions(this._options || {})
+    this.editor.setTheme(`ace/theme/${this._theme}`)
+    this.setMode(this._mode)
+    this.editor.setReadOnly(this._readOnly)
   }
 
-  initEvents() {
-    this.editor.on('change', () => this.updateText());
-    this.editor.on('paste', () => this.updateText());
+  initEvents(): void {
+    this.editor.on('change', () => this.updateText())
+    this.editor.on('paste', () => this.updateText())
   }
 
-  updateText() {
-    let newVal = this.editor.getValue();
+  updateText(): void {
+    const newVal = this.editor.getValue()
     if (newVal === this.oldText) {
-      return;
+      return
     }
     if (!this._durationBeforeCallback) {
-      this._text = newVal;
+      this._text = newVal
       this.zone.run(() => {
-        this.textChange.emit(newVal);
-        this.textChanged.emit(newVal);
-      });
+        this.textChange.emit(newVal)
+        this.textChanged.emit(newVal)
+      })
     } else {
       if (this.timeoutSaving != null) {
-        clearTimeout(this.timeoutSaving);
+        clearTimeout(this.timeoutSaving)
       }
 
       this.timeoutSaving = setTimeout(() => {
-        this._text = newVal;
+        this._text = newVal
         this.zone.run(() => {
-          this.textChange.emit(newVal);
-          this.textChanged.emit(newVal);
-        });
-        this.timeoutSaving = null;
-      }, this._durationBeforeCallback);
+          this.textChange.emit(newVal)
+          this.textChanged.emit(newVal)
+        })
+        this.timeoutSaving = null
+      }, this._durationBeforeCallback)
     }
-    this.oldText = newVal;
+    this.oldText = newVal
   }
 
-  setMode(mode: any) {
-    this._mode = mode;
+  setMode(mode: any): void {
+    this._mode = mode
     if (typeof this._mode === 'object') {
-      this.editor.getSession().setMode(this._mode);
+      this.editor.getSession().setMode(this._mode)
     } else {
-      this.editor.getSession().setMode(`ace/mode/${this._mode}`);
+      this.editor.getSession().setMode(`ace/mode/${this._mode}`)
     }
   }
 
-  setText(text: any) {
+  setText(text: any): void {
     if (this._text !== text) {
       if (text === null || text === undefined) {
-        text = '';
+        text = ''
       }
 
       if (this._autoUpdateContent === true) {
-        this._text = text;
-        this.editor.setValue(text);
-        this.editor.clearSelection();
+        this._text = text
+        this.editor.setValue(text)
+        this.editor.clearSelection()
       }
     }
   }
 
-  setDurationBeforeCallback(num: number) {
-    this._durationBeforeCallback = num;
+  setDurationBeforeCallback(num: number): void {
+    this._durationBeforeCallback = num
   }
 }
