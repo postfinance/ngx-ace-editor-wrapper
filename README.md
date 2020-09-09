@@ -4,7 +4,7 @@
 
 [![Travis CI](https://travis-ci.com/bbortt/ngx-ace-editor-wrapper.svg?branch=master)](https://travis-ci.com/bbortt/ngx-ace-editor-wrapper)
 [![npm version](https://badge.fury.io/js/%40bbortt%2Fngx-ace-editor-wrapper.svg)](https://npmjs.org/package/@bbortt/ngx-ace-editor-wrapper)
-[![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg?style=flat-square)](https://twitter.com/acdlite/status/974390255393505280)
+[![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg)](https://twitter.com/acdlite/status/974390255393505280)
 [![License: Apache 2](https://img.shields.io/badge/License-Apache2-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
