@@ -1,9 +1,9 @@
-# bbortt / ngx-ace-editor-wrapper
+# postfinance / ngx-ace-editor-wrapper
 
 > Ace editor integration with TypeScript for Angular 10.
 
-[![Travis CI](https://travis-ci.com/bbortt/ngx-ace-editor-wrapper.svg?branch=master)](https://travis-ci.com/bbortt/ngx-ace-editor-wrapper)
-[![npm version](https://badge.fury.io/js/%40bbortt%2Fngx-ace-editor-wrapper.svg)](https://npmjs.org/package/@bbortt/ngx-ace-editor-wrapper)
+[![Travis CI](https://travis-ci.com/postfinance/ngx-ace-editor-wrapper.svg?branch=master)](https://travis-ci.com/postfinance/ngx-ace-editor-wrapper)
+[![npm version](https://badge.fury.io/js/%40postfinance%2Fngx-ace-editor-wrapper.svg)](https://npmjs.org/package/@postfinance/ngx-ace-editor-wrapper)
 [![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg)](https://twitter.com/acdlite/status/974390255393505280)
 [![License: Apache 2](https://img.shields.io/badge/License-Apache2-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -25,7 +25,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Publishing
 
-Run `npm publish dist/bbortt/ngx-ace-editor-wrapper --access public` on `release` in order to publish the artifact. Don't forget to add `--tag beta` when publishing from `canary`.
+Run `npm publish dist/postfinance/ngx-ace-editor-wrapper --access public` on `release` in order to publish the artifact. Don't forget to add `--tag beta` when publishing from `canary`.
 
 # Running Tests
 
