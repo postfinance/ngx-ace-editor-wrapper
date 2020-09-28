@@ -13,9 +13,9 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
-      "@bbortt/ngx-ace-editor-wrapper": [
-        "dist/bbortt/ngx-ace-editor-wrapper/bbortt-ngx-ace-editor-wrapper",
-        "dist/bbortt/ngx-ace-editor-wrapper"
+      "@postfinance/ngx-ace-editor-wrapper": [
+        "dist/postfinance/ngx-ace-editor-wrapper/postfinance-ngx-ace-editor-wrapper",
+        "dist/postfinance/ngx-ace-editor-wrapper"
       ]
     }
   }

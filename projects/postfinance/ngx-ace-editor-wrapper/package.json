@@ -1,17 +1,17 @@
 {
-  "name": "@bbortt/ngx-ace-editor-wrapper",
+  "name": "@postfinance/ngx-ace-editor-wrapper",
   "version": "10.0.1-0",
   "license": "Apache-2.0",
   "author": {
-    "name": "Timon Borter",
-    "url": "https://bbortt.github.io"
+    "name": "PostFinance AG",
+    "url": "https://github.com/postfinance"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bbortt/ngx-ace-editor-wrapper.git"
+    "url": "https://github.com/postfinance/ngx-ace-editor-wrapper.git"
   },
   "bugs": {
-    "url": "https://github.com/bbortt/ngx-ace-editor-wrapper/issues"
+    "url": "https://github.com/postfinance/ngx-ace-editor-wrapper/issues"
   },
   "peerDependencies": {
     "@angular/cli": "^10.0.0",

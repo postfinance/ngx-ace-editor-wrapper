@@ -1,24 +1,24 @@
 {
-  "name": "ngx-ace-editor",
+  "name": "ngx-ace-editor-wrapper",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "author": {
-    "name": "Timon Borter",
-    "url": "https://bbortt.github.io"
+    "name": "PostFinance AG",
+    "url": "https://github.com/postfinance"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bbortt/ngx-ace-editor-wrapper.git"
+    "url": "https://github.com/postfinance/ngx-ace-editor-wrapper.git"
   },
   "bugs": {
-    "url": "https://github.com/bbortt/ngx-ace-editor-wrapper/issues"
+    "url": "https://github.com/postfinance/ngx-ace-editor-wrapper/issues"
   },
   "scripts": {
     "lint": "ng lint",
     "lint:check": "tslint-config-prettier-check ./tslint.json",
     "build": "ng build",
     "build:lib": "ng build --prod",
-    "prettier": "prettier \"{,src/**/,projects/bbortt/ngx-ace-editor-wrapper/,projects/bbortt/ngx-ace-editor-wrapper/src/**/}*.{md,json,ts,css,scss,yml}\"",
+    "prettier": "prettier \"{,src/**/,projects/postfinance/ngx-ace-editor-wrapper/,projects/postfinance/ngx-ace-editor-wrapper/src/**/}*.{md,json,ts,css,scss,yml}\"",
     "prettier:check": "npm run prettier -- --check",
     "prettier:fix": "npm run prettier -- --write",
     "test": "ng test"

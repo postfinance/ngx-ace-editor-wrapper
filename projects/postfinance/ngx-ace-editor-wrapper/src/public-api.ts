@@ -1,5 +1,5 @@
 /*
- * Public API Surface of @bbortt/ngx-ace-editor-wrapper
+ * Public API Surface of @postfinance/ngx-ace-editor-wrapper
  */
 
 export * from './lib/ngx-ace-editor-wrapper.component'
