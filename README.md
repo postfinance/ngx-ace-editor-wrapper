@@ -9,6 +9,15 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
 
+---
+
+- [Development Server](#development-server)
+- [Code scaffolding](#code-scaffolding)
+- [Build](#build)
+  - [Publishing](#publishing)
+- [Running tests](#running-tests)
+- [Further help](#further-help)
+
 # Development server
 
 > Currently not implemented. An example will be added soon.
@@ -25,7 +34,11 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Publishing
 
-Run `npm publish dist/postfinance/ngx-ace-editor-wrapper --access public` on `release` in order to publish the artifact. Don't forget to add `--tag beta` when publishing from `canary`.
+Run `npm publish dist/postfinance/ngx-ace-editor-wrapper` on `release` in order to publish the artifact.
+
+### Canary and `beta`
+
+Don't forget to add `--tag beta` when publishing from `canary` branch.
 
 # Running Tests
 
@@ -35,7 +48,7 @@ Run `npm publish dist/postfinance/ngx-ace-editor-wrapper --access public` on `re
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-# End-to-end tests
+## End-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
