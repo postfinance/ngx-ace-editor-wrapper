@@ -17,9 +17,7 @@ script:
   - npm run lint
   - npm run prettier:check
   - npm run build:lib
-# We do not currently have any tests..
-#  - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
 
 cache:
   directories:
-    - ./node_modules
+    - './node_modules'

@@ -1,13 +1,22 @@
-# bbortt / ngx-ace-editor-wrapper
+# postfinance / ngx-ace-editor-wrapper
 
 > Ace editor integration with TypeScript for Angular 10.
 
-[![Travis CI](https://travis-ci.com/bbortt/ngx-ace-editor-wrapper.svg?branch=master)](https://travis-ci.com/bbortt/ngx-ace-editor-wrapper)
-[![npm version](https://badge.fury.io/js/%40bbortt%2Fngx-ace-editor-wrapper.svg)](https://npmjs.org/package/@bbortt/ngx-ace-editor-wrapper)
-[![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg?style=flat-square)](https://twitter.com/acdlite/status/974390255393505280)
+[![Travis CI](https://travis-ci.com/postfinance/ngx-ace-editor-wrapper.svg?branch=master)](https://travis-ci.com/postfinance/ngx-ace-editor-wrapper)
+[![npm version](https://badge.fury.io/js/%40postfinance%2Fngx-ace-editor-wrapper.svg)](https://npmjs.org/package/@postfinance/ngx-ace-editor-wrapper)
+[![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg)](https://twitter.com/acdlite/status/974390255393505280)
 [![License: Apache 2](https://img.shields.io/badge/License-Apache2-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
+
+---
+
+- [Development Server](#development-server)
+- [Code scaffolding](#code-scaffolding)
+- [Build](#build)
+  - [Publishing](#publishing)
+- [Running tests](#running-tests)
+- [Further help](#further-help)
 
 # Development server
 
@@ -25,7 +34,11 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Publishing
 
-Run `npm publish dist/bbortt/ngx-ace-editor-wrapper --access public` on `release` in order to publish the artifact. Don't forget to add `--tag beta` when publishing from `canary`.
+Run `npm publish dist/postfinance/ngx-ace-editor-wrapper` on `release` in order to publish the artifact.
+
+### Canary and `beta`
+
+Don't forget to add `--tag beta` when publishing from `canary` branch.
 
 # Running Tests
 
@@ -35,7 +48,7 @@ Run `npm publish dist/bbortt/ngx-ace-editor-wrapper --access public` on `release
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-# End-to-end tests
+## End-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
