@@ -11,7 +11,7 @@ import {
 import 'brace'
 import 'brace/theme/monokai'
 
-declare var ace: any
+declare let ace: any
 
 @Directive({
   selector: '[ngxAceEditor]',
@@ -24,15 +24,7 @@ export class AceEditorDirective implements OnInit, OnDestroy {
   oldText: any
   timeoutSaving: any
 
-  constructor(elementRef: ElementRef, private zone: NgZone) {
-    const el = elementRef.nativeElement
-    this.zone.runOutsideAngular(() => {
-      this.editor = ace.edit(el)
-    })
-    this.editor.$blockScrolling = Infinity
-  }
-
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _options: any = {}
 
   @Input() set options(options: any) {
@@ -40,7 +32,7 @@ export class AceEditorDirective implements OnInit, OnDestroy {
     this.editor.setOptions(options || {})
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _readOnly = false
 
   @Input() set readOnly(readOnly: any) {
@@ -48,7 +40,7 @@ export class AceEditorDirective implements OnInit, OnDestroy {
     this.editor.setReadOnly(readOnly)
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _theme = 'monokai'
 
   @Input() set theme(theme: any) {
@@ -56,28 +48,28 @@ export class AceEditorDirective implements OnInit, OnDestroy {
     this.editor.setTheme(`ace/theme/${theme}`)
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _mode: any = 'html'
 
   @Input() set mode(mode: any) {
     this.setMode(mode)
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _autoUpdateContent = true
 
   @Input() set autoUpdateContent(status: any) {
     this._autoUpdateContent = status
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _durationBeforeCallback = 0
 
   @Input() set durationBeforeCallback(num: number) {
     this.setDurationBeforeCallback(num)
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match
   private _text = ''
 
   @Input() get text(): string {
@@ -90,6 +82,14 @@ export class AceEditorDirective implements OnInit, OnDestroy {
 
   get aceEditor(): any {
     return this.editor
+  }
+
+  constructor(elementRef: ElementRef, private zone: NgZone) {
+    const el = elementRef.nativeElement
+    this.zone.runOutsideAngular(() => {
+      this.editor = ace.edit(el)
+    })
+    this.editor.$blockScrolling = Infinity
   }
 
   ngOnInit(): void {
