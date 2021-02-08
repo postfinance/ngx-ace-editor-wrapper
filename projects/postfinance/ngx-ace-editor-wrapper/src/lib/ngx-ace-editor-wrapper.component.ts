@@ -13,7 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import 'brace'
 import 'brace/theme/monokai'
 
-declare var ace: any
+declare let ace: any
 
 @Component({
   selector: 'ngx-ace-editor',
@@ -39,57 +39,49 @@ export class AceEditorComponent
 
   private editor: any
 
-  constructor(elementRef: ElementRef, private zone: NgZone) {
-    const el = elementRef.nativeElement
-    this.zone.runOutsideAngular(() => {
-      this.editor = ace.edit(el)
-    })
-    this.editor.$blockScrolling = Infinity
-  }
-
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _options: any = {}
 
   @Input() set options(options: any) {
     this.setOptions(options)
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _readOnly = false
 
   @Input() set readOnly(readOnly: any) {
     this.setReadOnly(readOnly)
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _theme = 'monokai'
 
   @Input() set theme(theme: any) {
     this.setTheme(theme)
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _mode: any = 'html'
 
   @Input() set mode(mode: any) {
     this.setMode(mode)
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _autoUpdateContent = true
 
   @Input() set autoUpdateContent(status: any) {
     this.setAutoUpdateContent(status)
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _durationBeforeCallback = 0
 
   @Input() set durationBeforeCallback(num: number) {
     this.setDurationBeforeCallback(num)
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _text = ''
 
   get text(): string {
@@ -107,6 +99,14 @@ export class AceEditorComponent
   @Input()
   set value(value: string) {
     this.setText(value)
+  }
+
+  constructor(elementRef: ElementRef, private zone: NgZone) {
+    const el = elementRef.nativeElement
+    this.zone.runOutsideAngular(() => {
+      this.editor = ace.edit(el)
+    })
+    this.editor.$blockScrolling = Infinity
   }
 
   ngOnInit(): void {
@@ -217,6 +217,6 @@ export class AceEditorComponent
     return this.editor
   }
 
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match
   private _onChange = (_: any) => {}
 }

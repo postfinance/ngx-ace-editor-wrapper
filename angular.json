@@ -30,13 +30,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/postfinance/ngx-ace-editor-wrapper/tsconfig.lib.json",
-              "projects/postfinance/ngx-ace-editor-wrapper/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "projects/postfinance/ngx-ace-editor-wrapper/**/*.ts",
+              "projects/postfinance/ngx-ace-editor-wrapper/**/*.html"
+            ]
           }
         }
       }
