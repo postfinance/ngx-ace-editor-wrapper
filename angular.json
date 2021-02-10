@@ -132,7 +132,7 @@
       }
     }
   },
-  "defaultProject": "@postfinance/ngx-ace-editor-wrapper-sample",
+  "defaultProject": "@postfinance/ngx-ace-editor-wrapper-samples",
   "cli": {
     "packageManager": "npm"
   }
