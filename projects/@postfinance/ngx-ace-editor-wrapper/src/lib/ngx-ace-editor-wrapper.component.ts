@@ -16,7 +16,7 @@ declare let ace: any
 @Component({
   selector: 'ngx-ace-editor',
   template: '',
-  styles: [':host { display:block;width:100%; }'],
+  styles: [':host { display: block; width: 100%; }'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -52,7 +52,7 @@ export class AceEditorComponent
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
-  private _theme = 'monokai'
+  private _theme = ''
 
   @Input() set theme(theme: any) {
     this.setTheme(theme)
@@ -169,7 +169,7 @@ export class AceEditorComponent
 
   setTheme(theme: any): void {
     this._theme = theme
-    this.editor.setTheme(`brace/theme/${theme}`)
+    this.editor.setTheme(`ace/theme/${theme}`)
   }
 
   setMode(mode: any): void {
@@ -177,7 +177,7 @@ export class AceEditorComponent
     if (typeof this._mode === 'object') {
       this.editor.getSession().setMode(this._mode)
     } else {
-      this.editor.getSession().setMode(`brace/mode/${this._mode}`)
+      this.editor.getSession().setMode(`ace/mode/${this._mode}`)
     }
   }
 

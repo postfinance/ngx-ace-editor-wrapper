@@ -14,8 +14,8 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "@postfinance/ngx-ace-editor-wrapper": [
-        "dist/postfinance/ngx-ace-editor-wrapper/postfinance-ngx-ace-editor-wrapper",
-        "dist/postfinance/ngx-ace-editor-wrapper"
+        "dist/@postfinance/ngx-ace-editor-wrapper/postfinance-ngx-ace-editor-wrapper",
+        "dist/@postfinance/ngx-ace-editor-wrapper"
       ]
     }
   }

@@ -15,11 +15,14 @@
   },
   "scripts": {
     "lint": "ng lint",
+    "lint:lib": "ng lint @postfinance/ngx-ace-editor-wrapper",
     "build": "ng build",
-    "build:lib": "ng build --prod",
-    "prettier": "prettier \"{,src/**/,projects/postfinance/ngx-ace-editor-wrapper/,projects/postfinance/ngx-ace-editor-wrapper/src/**/}*.{md,json,ts,css,scss}\"",
+    "build:lib": "ng build @postfinance/ngx-ace-editor-wrapper",
+    "dev": "npm run build:lib -- --watch",
+    "prettier": "prettier \"{,src/**/,projects/@postfinance/**/,projects/@postfinance/**/src/**/}*.{md,json,ts,css,scss}\"",
     "prettier:check": "npm run prettier -- --check",
     "prettier:fix": "npm run prettier -- --write",
+    "start": "ng serve",
     "test": "ng test"
   },
   "dependencies": {

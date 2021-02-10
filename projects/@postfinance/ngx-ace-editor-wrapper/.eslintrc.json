@@ -6,12 +6,11 @@
       "files": ["*.ts"],
       "parserOptions": {
         "project": [
-          "projects/postfinance/ngx-ace-editor-wrapper/tsconfig.lib.json",
-          "projects/postfinance/ngx-ace-editor-wrapper/tsconfig.spec.json"
+          "projects/@postfinance/ngx-ace-editor-wrapper/tsconfig.lib.json",
+          "projects/@postfinance/ngx-ace-editor-wrapper/tsconfig.spec.json"
         ],
         "createDefaultProgram": true
       },
-      "plugins": [],
       "rules": {
         "@angular-eslint/component-selector": [
           "error",

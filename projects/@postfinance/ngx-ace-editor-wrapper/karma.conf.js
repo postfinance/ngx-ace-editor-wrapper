@@ -18,7 +18,7 @@ module.exports = function (config) {
     coverageIstanbulReporter: {
       dir: require('path').join(
         __dirname,
-        '../../../coverage/postfinance/ngx-ace-editor-wrapper'
+        '../../../coverage/@postfinance/ngx-ace-editor-wrapper'
       ),
       reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true,

@@ -5,6 +5,11 @@ Ace editor integration with TypeScript for Angular 10.
 [![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg)](https://twitter.com/acdlite/status/974390255393505280)
 [![License: Apache 2](https://img.shields.io/badge/License-Apache2-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+- [Installation](#installation)
+- [Usage](#usage)
+- [Hat Tips](#hat-tips)
+- [License](#license)
+
 # Installation
 
 `npm i @postfinance/ngx-ace-editor-wrapper`
@@ -30,16 +35,12 @@ import { AceEditorModule } from '@postfinance/ngx-ace-editor-wrapper';
 > Minimal
 
 ```ts
-//import { AceEditorModule } from '@postfinance/ngx-ace-editor-wrapper';
+// import { AceEditorModule } from '@postfinance/ngx-ace-editor-wrapper';
 
 import { Component } from '@angular/core'
 
 @Component({
-  template: `
-  <div ngxAceEditor
-       [(text)]="text" // possible two way binding (thx ChrisProlls)
-       ></div>
-  `,
+  template: ` <div ngxAceEditor [(text)]="text"></div> `,
 })
 export class MyComponent {
   text: string = ''
@@ -51,8 +52,10 @@ export class MyComponent {
 ```ts
 import { Component } from '@angular/core'
 
-// to use a theme add `../node_modules/brace/theme/[THEME_NAME].js` to `scripts` in `angular.json`
-// (`eclipse` in this example)
+// Imports are important! You may configure it via `angular.json` as well.
+import 'brace'
+import 'brace/mode/sql'
+import 'brace/theme/eclipse'
 
 @Component({
   template: `
@@ -84,20 +87,19 @@ export class MyComponent {
 ```ts
 import { Component, ViewChild } from '@angular/core'
 
-// to use a theme add `../node_modules/brace/theme/[THEME_NAME].js` to `scripts` in `angular.json`
-// (`eclipse` in this example)
+import { AceEditorComponent } from '@postfinance/ngx-ace-editor-wrapper'
+
+// Imports are important!
+import 'brace'
 
 @Component({
   template: `
-  <ngx-ace-editor
-        #editor
-        [(text)]="text"
-        style="height:150px;">
-  </ace-editor>
+    <ngx-ace-editor #editor [(text)]="text" style="height:150px;">
+    </ngx-ace-editor>
   `,
 })
 export class AceCmp {
-  @ViewChild('editor')
+  @ViewChild(AceEditorComponent)
   editor
 
   text: string = ''
