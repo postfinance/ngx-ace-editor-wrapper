@@ -11,15 +11,15 @@ Ace editor integration with TypeScript for Angular 10.
 - [Hat Tips](#hat-tips)
 - [License](#license)
 
-# Examples
+## Examples
 
 There is a live example available on [GitHub Pages](https://postfinance.github.io/ngx-ace-editor-wrapper).
 
-# Installation
+## Installation
 
 `npm i @postfinance/ngx-ace-editor-wrapper`
 
-## Loading the module:
+### Loading the module:
 
 ```ts
 import { AceEditorModule } from '@postfinance/ngx-ace-editor-wrapper';
@@ -33,9 +33,9 @@ import { AceEditorModule } from '@postfinance/ngx-ace-editor-wrapper';
 })
 ```
 
-# Usage
+## Usage
 
-## Directive
+### Directive
 
 > Minimal
 
@@ -87,7 +87,7 @@ export class MyComponent {
 }
 ```
 
-## Component
+### Component
 
 ```ts
 import { Component, ViewChild } from '@angular/core'
@@ -125,11 +125,11 @@ export class AceCmp {
 }
 ```
 
-# Hat Tips
+## Hat Tips
 
 - To Andrei Tumilovich for the original Angular 9 integration: [`tavwizard/ace-editor-ng9`](https://github.com/tavwizard/ace-editor-ng9)
 - To Timon Borter for the Angular 10 migration: [`bbortt/ngx-ace-editor-wrapper`](https://github.com/bbortt/ngx-ace-editor-wrapper)
 
-# License
+## License
 
-This project is licensed under the terms of the [Apache 2.0 License](https://raw.githubusercontent.com/postfinance/ngx-ace-editor-wrapper/canary/LICENSE).
+This project is licensed under the terms of the [Apache 2.0 License](https://raw.githubusercontent.com/postfinance/ngx-ace-editor-wrapper/release/LICENSE).
