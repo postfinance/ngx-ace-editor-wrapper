@@ -45,11 +45,6 @@ export class AceEditorDirective implements OnInit, OnDestroy {
     this.setTheme(theme)
   }
 
-  private setTheme(theme: any) {
-    this._theme = theme
-    this.editor.setTheme(`ace/theme/${theme}`)
-  }
-
   // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _mode: any = 'html'
 
@@ -141,6 +136,11 @@ export class AceEditorDirective implements OnInit, OnDestroy {
       }, this._durationBeforeCallback)
     }
     this.oldText = newVal
+  }
+
+  setTheme(theme: any): void {
+    this._theme = theme
+    this.editor.setTheme(`ace/theme${theme}`)
   }
 
   setMode(mode: any): void {

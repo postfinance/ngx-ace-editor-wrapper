@@ -15,7 +15,6 @@
   },
   "scripts": {
     "lint": "ng lint",
-    "lint:lib": "ng lint @postfinance/ngx-ace-editor-wrapper",
     "build": "ng build",
     "build:lib": "ng build @postfinance/ngx-ace-editor-wrapper",
     "dev": "npm run build:lib -- --watch",
