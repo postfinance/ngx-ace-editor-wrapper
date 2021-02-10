@@ -20,9 +20,7 @@
 
 # Development server
 
-> Currently not implemented. An example will be added soon.
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to [`http://localhost:4200/`](http://localhost:4200/). The app will automatically reload if you change any of the source files.
 
 # Code scaffolding
 
@@ -30,11 +28,11 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 # Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `ng build:lib` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Publishing
 
-Run `npm publish dist/postfinance/ngx-ace-editor-wrapper` on `release` in order to publish the artifact.
+Run `npm publish dist/@postfinance/ngx-ace-editor-wrapper` on `release` in order to publish the artifact.
 
 ### Canary and `beta`
 
@@ -47,10 +45,6 @@ Don't forget to add `--tag beta` when publishing from `canary` branch.
 ## Unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## End-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 # Further help
 

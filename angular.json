@@ -5,43 +5,134 @@
   "projects": {
     "@postfinance/ngx-ace-editor-wrapper": {
       "projectType": "library",
-      "root": "projects/postfinance/ngx-ace-editor-wrapper",
-      "sourceRoot": "projects/postfinance/ngx-ace-editor-wrapper/src",
+      "root": "projects/@postfinance/ngx-ace-editor-wrapper",
+      "sourceRoot": "projects/@postfinance/ngx-ace-editor-wrapper/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/postfinance/ngx-ace-editor-wrapper/tsconfig.lib.json",
-            "project": "projects/postfinance/ngx-ace-editor-wrapper/ng-package.json"
+            "tsConfig": "projects/@postfinance/ngx-ace-editor-wrapper/tsconfig.lib.json",
+            "project": "projects/@postfinance/ngx-ace-editor-wrapper/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/postfinance/ngx-ace-editor-wrapper/tsconfig.lib.prod.json"
+              "tsConfig": "projects/@postfinance/ngx-ace-editor-wrapper/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/postfinance/ngx-ace-editor-wrapper/src/test.ts",
-            "tsConfig": "projects/postfinance/ngx-ace-editor-wrapper/tsconfig.spec.json",
-            "karmaConfig": "projects/postfinance/ngx-ace-editor-wrapper/karma.conf.js"
+            "main": "projects/@postfinance/ngx-ace-editor-wrapper/src/test.ts",
+            "tsConfig": "projects/@postfinance/ngx-ace-editor-wrapper/tsconfig.spec.json",
+            "karmaConfig": "projects/@postfinance/ngx-ace-editor-wrapper/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/postfinance/ngx-ace-editor-wrapper/**/*.ts",
-              "projects/postfinance/ngx-ace-editor-wrapper/**/*.html"
+              "projects/@postfinance/ngx-ace-editor-wrapper/**/*.ts",
+              "projects/@postfinance/ngx-ace-editor-wrapper/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "@postfinance/ngx-ace-editor-wrapper-samples": {
+      "projectType": "application",
+      "root": "projects/@postfinance/ngx-ace-editor-wrapper-samples",
+      "sourceRoot": "projects/@postfinance/ngx-ace-editor-wrapper-samples/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/@postfinance/ngx-ace-editor-wrapper-samples",
+            "index": "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/index.html",
+            "main": "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/main.ts",
+            "polyfills": "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/polyfills.ts",
+            "tsConfig": "projects/@postfinance/ngx-ace-editor-wrapper-samples/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/favicon.ico",
+              "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/assets"
+            ],
+            "styles": [
+              "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/styles.css"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/environments/environment.ts",
+                  "with": "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "@postfinance/ngx-ace-editor-wrapper-samples:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "@postfinance/ngx-ace-editor-wrapper-samples:build:production"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/test.ts",
+            "polyfills": "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/polyfills.ts",
+            "tsConfig": "projects/@postfinance/ngx-ace-editor-wrapper-samples/tsconfig.spec.json",
+            "karmaConfig": "projects/@postfinance/ngx-ace-editor-wrapper-samples/karma.conf.js",
+            "assets": [
+              "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/favicon.ico",
+              "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/assets"
+            ],
+            "styles": [
+              "projects/@postfinance/ngx-ace-editor-wrapper-samples/src/styles.css"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/@postfinance/ngx-ace-editor-wrapper/**/*.ts",
+              "projects/@postfinance/ngx-ace-editor-wrapper/**/*.html"
             ]
           }
         }
       }
     }
   },
-  "defaultProject": "@postfinance/ngx-ace-editor-wrapper",
+  "defaultProject": "@postfinance/ngx-ace-editor-wrapper-sample",
   "cli": {
     "packageManager": "npm"
   }

@@ -1,51 +1,61 @@
 import {
-  Directive,
+  Component,
   ElementRef,
   EventEmitter,
+  forwardRef,
   Input,
   NgZone,
   OnDestroy,
   OnInit,
   Output,
 } from '@angular/core'
-import 'brace'
-import 'brace/theme/monokai'
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 
 declare let ace: any
 
-@Directive({
-  selector: '[ngxAceEditor]',
+@Component({
+  selector: 'ngx-ace-editor',
+  template: '',
+  styles: [':host { display: block; width: 100%; }'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => AceEditorComponent),
+      multi: true,
+    },
+  ],
 })
-export class AceEditorDirective implements OnInit, OnDestroy {
+export class AceEditorComponent
+  implements ControlValueAccessor, OnInit, OnDestroy {
+  @Input() style: any = {}
+
   @Output() textChanged = new EventEmitter()
   @Output() textChange = new EventEmitter()
 
-  editor: any
   oldText: any
   timeoutSaving: any
+
+  private editor: any
 
   // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _options: any = {}
 
   @Input() set options(options: any) {
-    this._options = options
-    this.editor.setOptions(options || {})
+    this.setOptions(options)
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _readOnly = false
 
   @Input() set readOnly(readOnly: any) {
-    this._readOnly = readOnly
-    this.editor.setReadOnly(readOnly)
+    this.setReadOnly(readOnly)
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
-  private _theme = 'monokai'
+  private _theme = ''
 
   @Input() set theme(theme: any) {
-    this._theme = theme
-    this.editor.setTheme(`ace/theme/${theme}`)
+    this.setTheme(theme)
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
@@ -59,7 +69,7 @@ export class AceEditorDirective implements OnInit, OnDestroy {
   private _autoUpdateContent = true
 
   @Input() set autoUpdateContent(status: any) {
-    this._autoUpdateContent = status
+    this.setAutoUpdateContent(status)
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
@@ -69,19 +79,24 @@ export class AceEditorDirective implements OnInit, OnDestroy {
     this.setDurationBeforeCallback(num)
   }
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
   private _text = ''
 
-  @Input() get text(): string {
+  get text(): string {
     return this._text
   }
 
-  set text(text: string) {
+  @Input() set text(text: string) {
     this.setText(text)
   }
 
-  get aceEditor(): any {
-    return this.editor
+  get value(): string {
+    return this.text
+  }
+
+  @Input()
+  set value(value: string) {
+    this.setText(value)
   }
 
   constructor(elementRef: ElementRef, private zone: NgZone) {
@@ -102,10 +117,10 @@ export class AceEditorDirective implements OnInit, OnDestroy {
   }
 
   init(): void {
-    this.editor.setOptions(this._options || {})
-    this.editor.setTheme(`ace/theme/${this._theme}`)
+    this.setOptions(this._options || {})
+    this.setTheme(this._theme)
     this.setMode(this._mode)
-    this.editor.setReadOnly(this._readOnly)
+    this.setReadOnly(this._readOnly)
   }
 
   initEvents(): void {
@@ -124,8 +139,9 @@ export class AceEditorDirective implements OnInit, OnDestroy {
         this.textChange.emit(newVal)
         this.textChanged.emit(newVal)
       })
+      this._onChange(newVal)
     } else {
-      if (this.timeoutSaving != null) {
+      if (this.timeoutSaving) {
         clearTimeout(this.timeoutSaving)
       }
 
@@ -141,6 +157,21 @@ export class AceEditorDirective implements OnInit, OnDestroy {
     this.oldText = newVal
   }
 
+  setOptions(options: any): void {
+    this._options = options
+    this.editor.setOptions(options || {})
+  }
+
+  setReadOnly(readOnly: any): void {
+    this._readOnly = readOnly
+    this.editor.setReadOnly(readOnly)
+  }
+
+  setTheme(theme: any): void {
+    this._theme = theme
+    this.editor.setTheme(`ace/theme/${theme}`)
+  }
+
   setMode(mode: any): void {
     this._mode = mode
     if (typeof this._mode === 'object') {
@@ -150,21 +181,40 @@ export class AceEditorDirective implements OnInit, OnDestroy {
     }
   }
 
-  setText(text: any): void {
-    if (this._text !== text) {
-      if (text === null || text === undefined) {
-        text = ''
-      }
+  writeValue(value: any): void {
+    this.setText(value)
+  }
 
-      if (this._autoUpdateContent === true) {
-        this._text = text
-        this.editor.setValue(text)
-        this.editor.clearSelection()
-      }
+  registerOnChange(fn: any): void {
+    this._onChange = fn
+  }
+
+  registerOnTouched(fn: any): void {}
+
+  setText(text: any): void {
+    if (text === null || text === undefined) {
+      text = ''
     }
+    if (this._text !== text && this._autoUpdateContent === true) {
+      this._text = text
+      this.editor.setValue(text)
+      this._onChange(text)
+      this.editor.clearSelection()
+    }
+  }
+
+  setAutoUpdateContent(status: any): void {
+    this._autoUpdateContent = status
   }
 
   setDurationBeforeCallback(num: number): void {
     this._durationBeforeCallback = num
   }
+
+  getEditor(): any {
+    return this.editor
+  }
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match
+  private _onChange = (_: any) => {}
 }

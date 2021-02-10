@@ -6,8 +6,6 @@ const list = [AceEditorComponent, AceEditorDirective]
 
 @NgModule({
   declarations: [...list],
-  imports: [],
-  providers: [],
   exports: list,
 })
 export class AceEditorModule {}
