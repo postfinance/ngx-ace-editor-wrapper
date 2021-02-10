@@ -9,7 +9,6 @@ import {
   Output,
 } from '@angular/core'
 import 'brace'
-import 'brace/theme/monokai'
 
 declare let ace: any
 
@@ -45,7 +44,7 @@ export class AceEditorDirective implements OnInit, OnDestroy {
 
   @Input() set theme(theme: any) {
     this._theme = theme
-    this.editor.setTheme(`ace/theme/${theme}`)
+    this.editor.setTheme(`brace/theme/${theme}`)
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle,id-blacklist,id-match
@@ -103,7 +102,7 @@ export class AceEditorDirective implements OnInit, OnDestroy {
 
   init(): void {
     this.editor.setOptions(this._options || {})
-    this.editor.setTheme(`ace/theme/${this._theme}`)
+    this.editor.setTheme(`brace/theme/${this._theme}`)
     this.setMode(this._mode)
     this.editor.setReadOnly(this._readOnly)
   }
@@ -146,7 +145,7 @@ export class AceEditorDirective implements OnInit, OnDestroy {
     if (typeof this._mode === 'object') {
       this.editor.getSession().setMode(this._mode)
     } else {
-      this.editor.getSession().setMode(`ace/mode/${this._mode}`)
+      this.editor.getSession().setMode(`brace/mode/${this._mode}`)
     }
   }
 

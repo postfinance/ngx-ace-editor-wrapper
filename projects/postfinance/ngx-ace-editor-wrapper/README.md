@@ -51,22 +51,22 @@ export class MyComponent {
 ```ts
 import { Component } from '@angular/core'
 
-//to use theme "eclipse"
-//with angular-cli add "../node_modules/ace-builds/src-min/ace.js"
-//and "../node_modules/ace-builds/src-min/theme-eclipse.js" to "scripts" var into the file angular-cli.json
+// to use a theme add `../node_modules/brace/theme/[THEME_NAME].js` to `scripts` in `angular.json`
+// (`eclipse` in this example)
 
 @Component({
   template: `
   <div ngxAceEditor
-       [(text)]="text" // possible two way binding (thx ChrisProlls)
-       [mode]="'sql'" //string or object (thx ckiffel)
-       [theme]="'eclipse'"
-       [options]="options"
-       [readOnly]="false"
-       [autoUpdateContent]="true" //change content when [text] change
-       [durationBeforeCallback]="1000" //wait 1s before callback 'textChanged' sends new value
-       (textChanged)="onChange($event)"
-       style="min-height: 200px; width:100%; overflow: auto;"></div>
+      [(text)]="text" // possible two way binding (thx ChrisProlls)
+      [mode]="'sql'" //string or object (thx ckiffel)
+      [theme]="'eclipse'"
+      [options]="options"
+      [readOnly]="false"
+      [autoUpdateContent]="true" //change content when [text] change
+      [durationBeforeCallback]="1000" //wait 1s before callback 'textChanged' sends new value
+      (textChanged)="onChange($event)"
+      style="min-height: 200px; width:100%; overflow: auto;">
+  </div>
   `,
 })
 export class MyComponent {
@@ -84,19 +84,22 @@ export class MyComponent {
 ```ts
 import { Component, ViewChild } from '@angular/core'
 
-//to use theme eclipse
-//with angular-cli add "../node_modules/ace-builds/src-min/ace.js"
-//and "../node_modules/ace-builds/src-min/theme-eclipse.js" to "scripts" var into the file angular-cli.json
+// to use a theme add `../node_modules/brace/theme/[THEME_NAME].js` to `scripts` in `angular.json`
+// (`eclipse` in this example)
 
 @Component({
   template: `
   <ngx-ace-editor
-       [(text)]="text" // possible two way binding (thx ChrisProlls)
-        #editor style="height:150px;"></ace-editor>
+        #editor
+        [(text)]="text"
+        style="height:150px;">
+  </ace-editor>
   `,
 })
 export class AceCmp {
-  @ViewChild('editor') editor
+  @ViewChild('editor')
+  editor
+
   text: string = ''
 
   ngAfterViewInit() {

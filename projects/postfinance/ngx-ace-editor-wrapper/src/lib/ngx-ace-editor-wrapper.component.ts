@@ -10,8 +10,6 @@ import {
   Output,
 } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
-import 'brace'
-import 'brace/theme/monokai'
 
 declare let ace: any
 
@@ -171,7 +169,7 @@ export class AceEditorComponent
 
   setTheme(theme: any): void {
     this._theme = theme
-    this.editor.setTheme(`ace/theme/${theme}`)
+    this.editor.setTheme(`brace/theme/${theme}`)
   }
 
   setMode(mode: any): void {
@@ -179,7 +177,7 @@ export class AceEditorComponent
     if (typeof this._mode === 'object') {
       this.editor.getSession().setMode(this._mode)
     } else {
-      this.editor.getSession().setMode(`ace/mode/${this._mode}`)
+      this.editor.getSession().setMode(`brace/mode/${this._mode}`)
     }
   }
 

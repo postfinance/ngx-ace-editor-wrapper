@@ -11,7 +11,7 @@
         ],
         "createDefaultProgram": true
       },
-      "plugins": ["eslint-plugin-react"],
+      "plugins": [],
       "rules": {
         "@angular-eslint/component-selector": [
           "error",
