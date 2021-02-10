@@ -140,7 +140,7 @@ export class AceEditorDirective implements OnInit, OnDestroy {
 
   setTheme(theme: any): void {
     this._theme = theme
-    this.editor.setTheme(`ace/theme${theme}`)
+    this.editor.setTheme(`ace/theme/${theme}`)
   }
 
   setMode(mode: any): void {
