@@ -23,7 +23,7 @@
     "predeploy": "npm run build:pages",
     "dev": "npm run build:lib -- --watch",
     "publish": "npm publish dist/@postfinance/ngx-ace-editor-wrapper",
-    "prepublish": "npm run build:lib:prod",
+    "prepublishOnly": "npm run build:lib:prod",
     "prettier": "prettier \"{,src/**/,projects/@postfinance/**/,projects/@postfinance/**/src/**/}*.{md,json,ts,css,scss}\"",
     "prettier:check": "npm run prettier -- --check",
     "prettier:fix": "npm run prettier -- --write",
